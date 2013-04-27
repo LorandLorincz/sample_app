@@ -5,43 +5,52 @@ describe "Static pages" do
   let(:base_title) {"RoR Sample App"}
 
   describe "Home page" do
-    it "should have h1 'Sample App'" do
-      visit '/static_pages/home'
+    before { visit root_path}
+    it "Should have h1 'Sample App'" do
       page.should have_selector('h1', :text => 'Sample App')
     end
 
-    it "should have the title 'Home'" do
-      visit '/static_pages/home'
+    it "Should have the title 'Home'" do
       page.should have_selector('title', :text=> "#{base_title}")
     end
 
-    it "should not have a custom page title" do
-      visit '/static_pages/home'
+    it "Should have have a custom page title" do
       page.should_not have_selector('title', :text => '| Home')
     end
   end
 
   describe "Help page" do
-   it "should have h1 'Help'" do
-    visit '/static_pages/help'
+    before { visit help_path}
+   it "Should have h1 'Help'" do
     page.should have_selector('h1', :text=> 'Help')
    end
 
-   it "should have title 'Help'" do
-    visit '/static_pages/help'
+   it "Should have title 'Help'" do
     page.should have_selector('title', :text=>"#{base_title} | Help")
    end
   end
 
   describe "About page" do
-    it "should have h1 'About us'" do
-      visit '/static_pages/about'
+    before{visit about_path}
+    it "Should have h1 'About us'" do
       page.should have_selector('h1',:text=>'About us')
     end
 
-    it "should have the title 'About us'" do
-      visit "/static_pages/about"
+    it "Should have the title 'About us'" do
       page.should have_selector('title',:text=>"#{base_title} | About us")
     end
   end
+
+  describe "Contact page" do
+    before{visit contact_path}
+    it "Should have the h1 'Contact'" do
+      page.should have_selector('h1', text: 'Contact')
+    end
+
+    it "Should have the title 'Contact'" do
+      page.should have_selector('title',
+                    text: "#{base_title} | Contact")
+    end
+  end
+
 end
