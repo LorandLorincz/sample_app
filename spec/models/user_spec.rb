@@ -17,13 +17,14 @@ describe User do
 
   subject {@user}
 
-  it{ should respond_to(:name)}
-  it{ should respond_to(:email)}
-  it{ should respond_to(:password_digest)}
-  it{ should respond_to(:password)}
-  it{ should respond_to(:password_confirmation)}
-  it{ should respond_to(:authenticate)}
-  it{ should be_valid}
+  it { should respond_to(:name)}
+  it { should respond_to(:email)}
+  it { should respond_to(:password_digest)}
+  it { should respond_to(:password)}
+  it { should respond_to(:password_confirmation)}
+  it { should respond_to(:remember_token)}
+  it { should respond_to(:authenticate)}
+  it { should be_valid}
 
   describe "When name is not present" do
     before {@user.name = " "}
@@ -103,5 +104,10 @@ describe "when email format is invalid" do
     end
 
     it{should_not be_valid}
+  end
+
+  describe "Remember token" do
+    before  { @user.save }
+    it { @user.remember_token.should_not be_blank}
   end
 end
